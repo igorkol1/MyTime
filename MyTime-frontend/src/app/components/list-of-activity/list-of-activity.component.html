@@ -1,0 +1,20 @@
+<h1>Activities</h1>
+<div>
+  <table>
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Start</th>
+      <th>Finish</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let activity of activities">
+      <td>{{activity.title}}</td>
+      <td>{{activity.start}}</td>
+      <td>{{activity.finish}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
