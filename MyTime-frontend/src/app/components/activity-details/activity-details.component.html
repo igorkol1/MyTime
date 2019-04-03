@@ -1,0 +1,15 @@
+<h1>Activity</h1>
+
+<div>
+  <form #todoForm="ngForm">
+    
+    <input [(ngModel)]="activity.title" name="title" type="text" class="form-control" placeholder="Title">
+    <textarea [(ngModel)]="activity.description" class="form-control" name="description" placeholder="Description"></textarea>
+    <input [ngModel]="activity.start | date:'yyyy-MM-dd'" class="form-control" type="date" name="start">
+    <input [ngModel]="activity.finish | date:'yyyy-MM-dd'" class="form-control" type="date" name="finish">
+
+    <div class="conteiner justify-content-center" style="text-align:center;">
+        <button class="btn btn-success btn-lg" (click)="createActivity()">Save</button>
+    </div>
+</form>
+</div>
