@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { ListOfActivityComponent } from './components/list-of-activity/list-of-activity.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListOfActivityComponent,
-    ActivityDetailsComponent
+    ActivityDetailsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
