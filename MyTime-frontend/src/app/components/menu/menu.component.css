@@ -1,0 +1,29 @@
+header{
+    background-color: #24292e;
+    width: 100%;
+    height: 45px;
+    color: whitesmoke;
+}
+
+#logo{
+    padding: 5px;
+    width: 190px;
+    float: left;
+}
+
+#logo-icon{
+    float: left;
+    padding-right: 5px
+}
+
+#logo-text{
+    height: 32px;
+    font-size: 32px;
+    position: relative;
+    top: -8px;
+}
+
+#menu-icon{
+    padding: 5px;
+    float: right;  
+}

@@ -8,13 +8,15 @@ import { ListOfActivityComponent } from './components/list-of-activity/list-of-a
 import {HttpClientModule} from '@angular/common/http';
 import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListOfActivityComponent,
     ActivityDetailsComponent,
-    FooterComponent
+    FooterComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
