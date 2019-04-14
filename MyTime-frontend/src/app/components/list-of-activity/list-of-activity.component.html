@@ -1,7 +1,6 @@
 <div class="container">
-  <div class="col-lg-10 col-lg-offset-1">
+  <div class="col-lg-10 col-lg-offset-1" id="activityListContainer">
     <h1>Activities</h1>
-    <!--       TODO: Table does not want to fill whole container-->
     <div class="table-responsive-lg">
       <table class="table">
         <thead class="thead-dark">
@@ -15,8 +14,11 @@
         <tbody>
         <tr *ngFor="let activity of activities">
           <td>{{activity.title}}</td>
-          <td>{{activity.start}}</td>
-          <td>{{activity.finish}}</td>
+          <td>{{activity.start | date:'dd-MM-yyyy HH:mm'}}</td>
+          <td>{{activity.finish | date:'dd-MM-yyyy HH:mm'}}</td>
+          <td><i class="fas fa-trash" id="trashIcon"></i>
+            <i class="far fa-edit" id="editIcon"></i>
+          </td>
         </tr>
         </tbody>
       </table>

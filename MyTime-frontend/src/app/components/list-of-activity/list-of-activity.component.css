@@ -3,3 +3,15 @@
   height: 100%;
   width: 100%;
 }
+
+#trashIcon {
+  margin-inline-start: 40%;
+}
+
+#editIcon {
+  margin-inline-start: 10%;
+}
+
+#activityListContainer {
+  margin-inline-start: 8.5%;
+}
