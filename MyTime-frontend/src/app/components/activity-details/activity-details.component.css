@@ -1,0 +1,17 @@
+#formTitle{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#buttons-group {
+  margin-block-start: 5%;
+}
+
+#saveButton {
+  width: 90%;
+}
+
+#backButton {
+  width: 90%;
+  margin-inline-start: 10%;
+}

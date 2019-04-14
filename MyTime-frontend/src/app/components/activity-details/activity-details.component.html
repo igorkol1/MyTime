@@ -1,15 +1,50 @@
-<h1>Activity</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1 id="formTitle">Add Activity</h1>
 
-<div>
-  <form #todoForm="ngForm">
-    
-    <input [(ngModel)]="activity.title" name="title" type="text" class="form-control" placeholder="Title">
-    <textarea [(ngModel)]="activity.description" class="form-control" name="description" placeholder="Description"></textarea>
-    <input [ngModel]="activity.start | date:'yyyy-MM-dd'" class="form-control" type="date" name="start">
-    <input [ngModel]="activity.finish | date:'yyyy-MM-dd'" class="form-control" type="date" name="finish">
+      <form (ngSubmit)="!activityForm.invalid && createActivity()" #activityForm="ngForm" >
 
-    <div class="conteiner justify-content-center" style="text-align:center;">
-        <button class="btn btn-success btn-lg" (click)="createActivity()">Save</button>
+        <div class="form-group">
+          <input [(ngModel)]="activity.title" type="text" class="form-control" id="title" name="title"
+                 aria-describedby="titleHelp" placeholder="Enter title" required="required" minlength="3">
+          <small id="titleHelp" class="form-text text-muted">Tell me what did you do</small>
+        </div>
+
+        <div class="form-group">
+          <textarea [(ngModel)]="activity.description" class="form-control" id="description" name="description"
+                    aria-describedby="descriptionHelp" placeholder="Enter description"></textarea>
+          <small id="descriptionHelp" class="form-text text-muted">Tell me something more</small>
+        </div>
+
+        <div class="form-row">
+          <div class="col">
+            <input [ngModel]="activity.start | date:'yyyy-MM-dd'" class="form-control" type="date" name="start"
+                   aria-describedby="startDateHelp" required="required">
+            <small id="startDateHelp" class="form-text text-muted">When did you start?</small>
+          </div>
+          <div class="col">
+            <input [ngModel]="activity.finish | date:'yyyy-MM-dd'" class="form-control" type="date" name="finish"
+                   aria-describedby="finishDateHelp" required="required">
+            <small id="finishDateHelp" class="form-text text-muted">When did you finish?</small>
+          </div>
+
+        </div>
+
+        <div class="form-row" id="buttons-group">
+          <div class="col">
+            <button type="button" class="btn btn-primary btn-lg" (click)="createActivity()" id="saveButton" [disabled]="activityForm.invalid">Save</button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-dark btn-lg" (click)="navigateToList()" id="backButton">Back</button>
+          </div>
+
+        </div>
+
+      </form>
+
     </div>
-</form>
+
+  </div>
+
 </div>
