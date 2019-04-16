@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ActivityService {
@@ -24,5 +25,10 @@ public class ActivityService {
 
     public void deleteActivity(long activityId) {
         activityRepository.deleteById(activityId);
+    }
+
+    public ActivityEntity getActivity(long activityId) {
+        Optional<ActivityEntity> optionalActivityEntity = activityRepository.findById(activityId);
+        return optionalActivityEntity.orElse(null);
     }
 }

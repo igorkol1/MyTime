@@ -3,6 +3,7 @@ package MyTimebackend.MyTimebackend.controllers;
 import MyTimebackend.MyTimebackend.domain.entities.ActivityEntity;
 import MyTimebackend.MyTimebackend.services.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,9 +18,19 @@ public class ActivityController {
     @Autowired
     private ActivityService activityService;
 
-    @GetMapping("/activities/{id}")
-    public List<ActivityEntity> getAllActivities(@PathVariable long id) {
-        return activityService.findByUserId(id);
+    @GetMapping("/activities/{userId}")
+    public List<ActivityEntity> getAllActivities(@PathVariable long userId) {
+        return activityService.findByUserId(userId);
+    }
+
+    @GetMapping("/activities/getActivity/{activityId}")
+    public ResponseEntity<ActivityEntity> getActivity(@PathVariable long activityId) {
+        ActivityEntity activity = activityService.getActivity(activityId);
+        if (activity != null) {
+            return new ResponseEntity<ActivityEntity>(activity, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<ActivityEntity>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/activities/{userId}/addActivity")

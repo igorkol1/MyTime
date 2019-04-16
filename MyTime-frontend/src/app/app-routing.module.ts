@@ -5,7 +5,7 @@ import {ActivityDetailsComponent} from './components/activity-details/activity-d
 
 const routes: Routes = [
   {path: 'activitiesList', component: ListOfActivityComponent},
-  {path: 'activity', component: ActivityDetailsComponent}
+  {path: 'activity/:id', component: ActivityDetailsComponent}
 ];
 
 @NgModule({

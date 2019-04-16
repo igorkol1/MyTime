@@ -40,4 +40,9 @@ export class ListOfActivityComponent implements OnInit {
       }
     );
   }
+
+  updateActivity(id: number) {
+    console.log('Edit activity', id);
+    this.router.navigate(['activity', id]);
+  }
 }

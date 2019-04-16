@@ -24,4 +24,8 @@ export class ActivityService {
   deleteActivity(activityId: number) {
     return this.http.delete(`${API_URL}/activities/deleteActivity/${activityId}`);
   }
+
+  getActivity(activityId: number) {
+    return this.http.get<Activity>(`${API_URL}/activities/getActivity/${activityId}`);
+  }
 }
