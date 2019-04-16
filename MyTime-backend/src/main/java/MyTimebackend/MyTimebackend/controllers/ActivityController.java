@@ -31,4 +31,10 @@ public class ActivityController {
                 .toUri();
         return ResponseEntity.created(uri).build();
     }
+
+    @DeleteMapping("/activities/deleteActivity/{activityId}")
+    public ResponseEntity<Void> deleteActivity(@PathVariable long activityId) {
+        activityService.deleteActivity(activityId);
+        return ResponseEntity.noContent().build();
+    }
 }
