@@ -9,6 +9,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { MenuComponent } from './components/menu/menu.component';
     ListOfActivityComponent,
     ActivityDetailsComponent,
     FooterComponent,
-    MenuComponent
+    MenuComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
