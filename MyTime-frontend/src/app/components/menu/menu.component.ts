@@ -19,4 +19,8 @@ export class MenuComponent implements OnInit {
   addActivity() {
     this.router.navigate(['activity', -1]);
   }
+
+  logout() {
+    this.router.navigate(['logout']);
+  }
 }
