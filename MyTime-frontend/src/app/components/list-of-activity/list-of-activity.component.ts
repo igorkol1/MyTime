@@ -20,7 +20,7 @@ export class ListOfActivityComponent implements OnInit {
 
   ngOnInit() {
     console.log('Test oninit');
-    this.getActivities()
+    this.getActivities();
   }
 
   getActivities() {
@@ -32,4 +32,17 @@ export class ListOfActivityComponent implements OnInit {
     );
   }
 
+  deleteActivity(id: number) {
+    this.activityService.deleteActivity(id).subscribe(
+      response => {
+        console.log(response);
+        this.getActivities();
+      }
+    );
+  }
+
+  updateActivity(id: number) {
+    console.log('Edit activity', id);
+    this.router.navigate(['activity', id]);
+  }
 }

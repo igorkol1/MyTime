@@ -17,7 +17,15 @@ export class ActivityService {
     return this.http.get<Activity[]>(`${API_URL}/activities/${userId}`);
   }
 
-  createActivity(userId, activity){
-    return this.http.post(`${API_URL}/activities/${userId}/addActivity`,activity)
-  } 
+  createActivity(userId, activity) {
+    return this.http.post(`${API_URL}/activities/${userId}/addActivity`, activity);
+  }
+
+  deleteActivity(activityId: number) {
+    return this.http.delete(`${API_URL}/activities/deleteActivity/${activityId}`);
+  }
+
+  getActivity(activityId: number) {
+    return this.http.get<Activity>(`${API_URL}/activities/getActivity/${activityId}`);
+  }
 }

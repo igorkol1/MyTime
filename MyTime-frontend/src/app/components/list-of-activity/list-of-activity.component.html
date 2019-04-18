@@ -8,7 +8,7 @@
           <th>Title</th>
           <th>Start</th>
           <th>Finish</th>
-          <th>Actions</th>
+          <th id="actionsTitle">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -16,8 +16,8 @@
           <td>{{activity.title}}</td>
           <td>{{activity.start | date:'dd-MM-yyyy HH:mm'}}</td>
           <td>{{activity.finish | date:'dd-MM-yyyy HH:mm'}}</td>
-          <td><i class="fas fa-trash" id="trashIcon"></i>
-            <i class="far fa-edit" id="editIcon"></i>
+          <td><i class="fas fa-trash" id="trashIcon" (click)="deleteActivity(activity.id)"></i>
+            <i class="far fa-edit" id="editIcon" (click)="updateActivity(activity.id)"></i>
           </td>
         </tr>
         </tbody>
