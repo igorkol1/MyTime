@@ -6,12 +6,12 @@
       <form (ngSubmit)="!loginForm.invalid && login()" #loginForm="ngForm" id="loginForm">
         <h1 id="loginTitle">Login</h1>
         <div class="form-group">
-          <input [(ngModel)]="username" type="email" class="form-control" id="email" name="email" ngModel email="true"
+          <input [(ngModel)]="user.username" type="email" class="form-control" id="email" name="email"
                  placeholder="Enter email" required="required">
         </div>
 
         <div class="form-group">
-          <input [(ngModel)]="password" type="password" class="form-control" id="password" name="password"
+          <input [(ngModel)]="user.password" type="password" class="form-control" id="password" name="password"
                  placeholder="Enter password" required="required">
         </div>
 
