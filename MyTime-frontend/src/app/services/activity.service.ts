@@ -14,18 +14,18 @@ export class ActivityService {
   }
 
   getAllActivities(userId) {
-    return this.http.get<Activity[]>(`${API_URL}/activities/${userId}`);
+    return this.http.get<Activity[]>(`${API_URL}activities/${userId}`);
   }
 
   createActivity(userId, activity) {
-    return this.http.post(`${API_URL}/activities/${userId}/addActivity`, activity);
+    return this.http.post(`${API_URL}activities/${userId}/addActivity`, activity);
   }
 
   deleteActivity(activityId: number) {
-    return this.http.delete(`${API_URL}/activities/deleteActivity/${activityId}`);
+    return this.http.delete(`${API_URL}activities/deleteActivity/${activityId}`);
   }
 
   getActivity(activityId: number) {
-    return this.http.get<Activity>(`${API_URL}/activities/getActivity/${activityId}`);
+    return this.http.get<Activity>(`${API_URL}activities/getActivity/${activityId}`);
   }
 }

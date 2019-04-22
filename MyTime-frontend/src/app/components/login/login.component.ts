@@ -5,6 +5,7 @@ import {API_URL} from '../../app.constans';
 import {User} from '../../models/user.model';
 import {Observable} from 'rxjs';
 import {error} from '@angular/compiler/src/util';
+import {AuthorizationService} from '../../services/authorization.service';
 
 @Component({
   selector: 'app-login',
@@ -14,31 +15,23 @@ import {error} from '@angular/compiler/src/util';
 export class LoginComponent implements OnInit {
 
   user: User = new User('', '');
-  header:HttpHeaders;
+  header: HttpHeaders;
 
   constructor(
     private router: Router,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private auth: AuthorizationService) {
   }
 
   ngOnInit() {
   }
 
   login() {
-    this.header = new HttpHeaders({'Access-Control-Allow-Origin': '*'});
-    this.http.post <Observable<boolean>>(API_URL + 'login', {
-        userName: this.user.username,
-        password: this.user.password
-      }, {headers: this.header}
-    ).subscribe(isValid => {
-      if (isValid) {
-        sessionStorage.setItem('token',
-          btoa(this.user.username + ':' + this.user.password));
-        this.router.navigate(['/activitiesList']);
-      } else {
-        console.log('Invalid login');
-      }
-    });
+    this.auth.authorize(this.user.username, this.user.password);
+    console.log(this.auth.isAuthorize);
+    if (this.auth.isAuthorize) {
+      this.router.navigate(['/activitiesList']);
+    }
   }
 
   clearFields() {
