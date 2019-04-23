@@ -19,10 +19,11 @@ public class UserEntity {
 
     ;
 
-    public UserEntity(long id, String userName, String email) {
+    public UserEntity(long id, String userName, String email, String password) {
         this.id = id;
         this.userName = userName;
         this.email = email;
+        this.password = password;
     }
 
     public long getId() {
