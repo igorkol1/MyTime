@@ -15,7 +15,6 @@ import {AuthorizationService} from '../../services/authorization.service';
 export class LoginComponent implements OnInit {
 
   user: User = new User('', '');
-  header: HttpHeaders;
 
   constructor(
     private router: Router,
@@ -29,9 +28,6 @@ export class LoginComponent implements OnInit {
   login() {
     this.auth.authorize(this.user.username, this.user.password);
     console.log(this.auth.isAuthorize);
-    if (this.auth.isAuthorize) {
-      this.router.navigate(['/activitiesList']);
-    }
   }
 
   clearFields() {

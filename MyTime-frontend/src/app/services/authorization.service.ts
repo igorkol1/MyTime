@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {API_URL} from '../app.constans';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class AuthorizationService {
   isAuthorize = false;
 
   constructor(
+    private router: Router,
     private http: HttpClient
   ) {
   }
@@ -26,6 +28,7 @@ export class AuthorizationService {
         sessionStorage.setItem('Authorization', 'Basic ' +
           btoa(username + ':' + password));
         this.isAuthorize = true;
+        this.router.navigate(['/activitiesList']);
       } else {
         console.log('Invalid login');
       }
@@ -36,4 +39,7 @@ export class AuthorizationService {
     return sessionStorage.getItem('Authorization');
   }
 
+  logout() {
+    sessionStorage.removeItem('Authorization');
+  }
 }
