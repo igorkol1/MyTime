@@ -4,9 +4,9 @@
     <div id="logo-text">MyTime</div>
   </div>
   <div>
-    <i class="fas fa-sign-out-alt fa-2x" id="menu-icon" (click)="logout()"></i>
-    <i class="fas fa-chart-pie fa-2x" id="menu-icon"></i>
-    <i class="fas fa-plus fa-2x" id="menu-icon" (click)="addActivity()"></i>
+    <i *ngIf="auth.isAuthorize" class="fas fa-sign-out-alt fa-2x" id="menu-icon" (click)="logout()"></i>
+    <i *ngIf="auth.isAuthorize" class="fas fa-chart-pie fa-2x" id="menu-icon"></i>
+    <i *ngIf="auth.isAuthorize" class="fas fa-plus fa-2x" id="menu-icon" (click)="addActivity()"></i>
 
   </div>
 
