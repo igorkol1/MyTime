@@ -24,7 +24,7 @@ export class ListOfActivityComponent implements OnInit {
   }
 
   getActivities() {
-    this.activityService.getAllActivities('10001').subscribe(
+    this.activityService.getAllActivities().subscribe(
       respone => {
         console.log(respone);
         this.activities = respone;

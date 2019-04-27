@@ -1,5 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import {API_URL} from '../../app.constans';
+import {User} from '../../models/user.model';
+import {Observable} from 'rxjs';
+import {error} from '@angular/compiler/src/util';
+import {AuthorizationService} from '../../services/authorization.service';
 
 @Component({
   selector: 'app-login',
@@ -7,21 +13,25 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  username: String;
-  password: String;
 
-  constructor(private router: Router) {
+  user: User = new User('', '');
+
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private auth: AuthorizationService) {
   }
 
   ngOnInit() {
   }
 
   login() {
-    this.router.navigate(['/activitiesList']);
+    this.auth.authorize(this.user.username, this.user.password);
+    console.log(this.auth.isAuthorize);
   }
 
   clearFields() {
-    this.username = '';
-    this.password = '';
+    this.user.username = '';
+    this.user.password = '';
   }
 }

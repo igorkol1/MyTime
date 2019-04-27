@@ -36,7 +36,7 @@ export class ActivityDetailsComponent implements OnInit {
   }
 
   createActivity() {
-    this.activityService.createActivity(10001, this.activity).subscribe(
+    this.activityService.createActivity(this.activity).subscribe(
       data => {
         console.log(data);
         this.navigateToList();
