@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ActivityRepository extends JpaRepository<ActivityEntity,Long> {
+public interface ActivityRepository extends JpaRepository<ActivityEntity, Long> {
 
     List<ActivityEntity> findByUserId(long userId);
 

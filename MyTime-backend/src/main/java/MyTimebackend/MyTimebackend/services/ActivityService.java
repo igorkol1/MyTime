@@ -1,7 +1,9 @@
 package MyTimebackend.MyTimebackend.services;
 
 import MyTimebackend.MyTimebackend.domain.entities.ActivityEntity;
+import MyTimebackend.MyTimebackend.domain.entities.UserEntity;
 import MyTimebackend.MyTimebackend.domain.reporitories.ActivityRepository;
+import MyTimebackend.MyTimebackend.domain.reporitories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +16,24 @@ public class ActivityService {
     @Autowired
     ActivityRepository activityRepository;
 
-    public List<ActivityEntity> findByUserId(Long id) {
-        return activityRepository.findByUserId(id);
+    @Autowired
+    UserRepository userRepository;
+
+    public List<ActivityEntity> findByUsername(String username) {
+        UserEntity user = userRepository.findByUserName(username);
+        if (user != null) {
+            return activityRepository.findByUserId(user.getId());
+        }
+        return null;
     }
 
-    public ActivityEntity createActivity(long userId, ActivityEntity activity) {
-        activity.setUserId(userId);
-        return activityRepository.save(activity);
+    public ActivityEntity createActivity(String username, ActivityEntity activity) {
+        UserEntity user = userRepository.findByUserName(username);
+        if (user != null) {
+            activity.setUserId(user.getId());
+            return activityRepository.save(activity);
+        }
+        return null;
     }
 
     public void deleteActivity(long activityId) {

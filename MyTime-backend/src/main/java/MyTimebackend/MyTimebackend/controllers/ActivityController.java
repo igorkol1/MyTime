@@ -5,6 +5,7 @@ import MyTimebackend.MyTimebackend.services.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -18,9 +19,10 @@ public class ActivityController {
     @Autowired
     private ActivityService activityService;
 
-    @GetMapping("/activities/{userId}")
-    public List<ActivityEntity> getAllActivities(@PathVariable long userId) {
-        return activityService.findByUserId(userId);
+    @GetMapping("/activities")
+    public List<ActivityEntity> getAllActivities(Authentication authentication) {
+        String username = authentication.getName();
+        return activityService.findByUsername(username);
     }
 
     @GetMapping("/activities/getActivity/{activityId}")
@@ -33,9 +35,10 @@ public class ActivityController {
         }
     }
 
-    @PostMapping("/activities/{userId}/addActivity")
-    public ResponseEntity<Void> saveActivity(@PathVariable long userId, @RequestBody ActivityEntity activity) {
-        ActivityEntity createdActivity = activityService.createActivity(userId, activity);
+    @PostMapping("/activities/addActivity")
+    public ResponseEntity<Void> saveActivity(Authentication authentication, @RequestBody ActivityEntity activity) {
+        String username = authentication.getName();
+        ActivityEntity createdActivity = activityService.createActivity(username, activity);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(createdActivity.getId())
@@ -48,4 +51,5 @@ public class ActivityController {
         activityService.deleteActivity(activityId);
         return ResponseEntity.noContent().build();
     }
+
 }

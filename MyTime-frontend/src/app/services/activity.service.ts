@@ -13,12 +13,12 @@ export class ActivityService {
   ) {
   }
 
-  getAllActivities(userId) {
-    return this.http.get<Activity[]>(`${API_URL}activities/${userId}`);
+  getAllActivities() {
+    return this.http.get<Activity[]>(`${API_URL}activities`);
   }
 
-  createActivity(userId, activity) {
-    return this.http.post(`${API_URL}activities/${userId}/addActivity`, activity);
+  createActivity(activity) {
+    return this.http.post(`${API_URL}activities/addActivity`, activity);
   }
 
   deleteActivity(activityId: number) {
