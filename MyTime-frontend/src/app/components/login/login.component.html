@@ -5,6 +5,9 @@
 
       <form (ngSubmit)="!loginForm.invalid && login()" #loginForm="ngForm" id="loginForm">
         <h1 id="loginTitle">Login</h1>
+        <div *ngIf="invalidLogin" class="alert alert-primary" role="alert">
+          Invalid login or password
+        </div>
         <div class="form-group">
           <input [(ngModel)]="user.username" type="email" class="form-control" id="email" name="email"
                  placeholder="Enter email" required="required">

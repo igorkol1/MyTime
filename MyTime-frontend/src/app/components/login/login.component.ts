@@ -15,6 +15,7 @@ import {AuthorizationService} from '../../services/authorization.service';
 export class LoginComponent implements OnInit {
 
   user: User = new User('', '');
+  invalidLogin = false;
 
   constructor(
     private router: Router,
@@ -27,11 +28,14 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.auth.authorize(this.user.username, this.user.password);
-    console.log(this.auth.isAuthorize);
+    if (!this.auth.isAuthorize) {
+      this.invalidLogin = true;
+    }
   }
 
   clearFields() {
     this.user.username = '';
     this.user.password = '';
+    this.invalidLogin = false;
   }
 }
