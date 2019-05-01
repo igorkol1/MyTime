@@ -24,3 +24,33 @@ values (10005, 'Test 5', 'Work', 10002, timestamp '2009-09-09 09:30:25', timesta
 
 insert into activities(id, description, title, user_id, start, finish)
 values (10006, 'Test 6', 'Study', 10002, timestamp '2009-09-09 09:30:25', timestamp '2009-09-09 09:30:25');
+
+insert into ACTIVITIES_TYPES(id, activity_name, user_id)
+values (10001, 'Work', 10001);
+
+insert into ACTIVITIES_TYPES(id, activity_name, user_id)
+values (10002, 'Study', 10001);
+
+insert into ACTIVITIES_TYPES(id, activity_name, user_id)
+values (10003, 'Sport', 10001);
+
+insert into ACTIVITIES_TYPES(id, activity_name, user_id)
+values (10004, 'Relax', 10001);
+
+insert into ACTIVITIES_TYPES(id, activity_name, user_id)
+values (10005, 'Reading', 10001);
+
+insert into ACTIVITIES_TYPES(id, activity_name, user_id)
+values (10006, 'Work', 10002);
+
+insert into ACTIVITIES_TYPES(id, activity_name, user_id)
+values (10007, 'Study', 10002);
+
+insert into ACTIVITIES_TYPES(id, activity_name, user_id)
+values (10008, 'Sport', 10002);
+
+insert into ACTIVITIES_TYPES(id, activity_name, user_id)
+values (10009, 'Relax', 10002);
+
+insert into ACTIVITIES_TYPES(id, activity_name, user_id)
+values (10010, 'Reading', 10002);
