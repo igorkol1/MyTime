@@ -8,19 +8,16 @@
         <div class="form-group">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
-            Test {{test}}
+            {{currentActivityType.activityName}}
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item">Work</a>
-            <a class="dropdown-item">Study</a>
-            <a class="dropdown-item">Relax</a>
-            <a class="dropdown-item">{{test}}</a>
+          <div  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a *ngFor="let activityType of activityTypes" class="dropdown-item" (click)="selectActivityType(activityType)">{{activityType.activityName}}</a>
             <a class="dropdown-item">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Recipient's username"
-                       aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input [(ngModel)]="newActivityName" id="newActivityName" type="text" class="form-control" placeholder="New Activity type"
+                       aria-label="Recipient's username" aria-describedby="basic-addon2" name="newActivityName">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button"><i class="fas fa-plus"></i></button>
+                  <button class="btn btn-outline-secondary" type="button" (click)="addActivityType()"><i class="fas fa-plus"></i></button>
                 </div>
               </div>
             </a>

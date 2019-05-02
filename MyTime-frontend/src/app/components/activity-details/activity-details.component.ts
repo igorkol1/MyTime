@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Activity} from 'src/app/models/activity.model';
 import {ActivityService} from 'src/app/services/activity.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ActivityType} from '../../models/activity.type';
+import {ActivityTypeService} from '../../services/activity-type.service';
 
 @Component({
   selector: 'app-activity-details',
@@ -12,10 +14,13 @@ export class ActivityDetailsComponent implements OnInit {
 
   id: number;
   activity: Activity;
-  test = 'Test Dropdown';
+  activityTypes: ActivityType[];
+  currentActivityType: ActivityType;
+  newActivityName: String;
 
   constructor(
     private activityService: ActivityService,
+    private activityTypeService: ActivityTypeService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -23,6 +28,8 @@ export class ActivityDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
+    this.currentActivityType = new ActivityType(-1, 10001, 'Choose activity type');
+    this.refreshActivityTypesList();
     this.activity = new Activity(-1, 10001, '', '', new Date, new Date);
     if (this.id != -1) {
       this.activityService.getActivity(this.id).subscribe(
@@ -48,5 +55,24 @@ export class ActivityDetailsComponent implements OnInit {
 
   navigateToList() {
     this.router.navigate(['activitiesList']);
+  }
+
+  selectActivityType(activityType: ActivityType) {
+    this.currentActivityType = activityType;
+  }
+
+  addActivityType() {
+    this.currentActivityType.activityName = this.newActivityName;
+    this.activityTypeService.addActivityType(this.currentActivityType).subscribe(() => {
+      this.refreshActivityTypesList();
+    });
+  }
+
+  refreshActivityTypesList() {
+    this.activityTypeService.getActivityTypes().subscribe(response => {
+        console.log(response);
+        this.activityTypes = response;
+      }
+    );
   }
 }
