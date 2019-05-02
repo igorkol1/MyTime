@@ -12,6 +12,7 @@ export class ActivityDetailsComponent implements OnInit {
 
   id: number;
   activity: Activity;
+  test = 'Test Dropdown';
 
   constructor(
     private activityService: ActivityService,

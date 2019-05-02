@@ -3,12 +3,28 @@
     <div class="col-md-6 offset-md-3">
       <h1 id="formTitle">Add Activity</h1>
 
-      <form (ngSubmit)="!activityForm.invalid && createActivity()" #activityForm="ngForm" >
+      <form (ngSubmit)="!activityForm.invalid && createActivity()" #activityForm="ngForm">
 
         <div class="form-group">
-          <input [(ngModel)]="activity.title" type="text" class="form-control" id="title" name="title"
-                 aria-describedby="titleHelp" placeholder="Enter title" required="required" minlength="3">
-          <small id="titleHelp" class="form-text text-muted">Tell me what did you do</small>
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+            Test {{test}}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item">Work</a>
+            <a class="dropdown-item">Study</a>
+            <a class="dropdown-item">Relax</a>
+            <a class="dropdown-item">{{test}}</a>
+            <a class="dropdown-item">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Recipient's username"
+                       aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button"><i class="fas fa-plus"></i></button>
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
 
         <div class="form-group">
@@ -33,7 +49,9 @@
 
         <div class="form-row" id="buttons-group">
           <div class="col">
-            <button type="submit" class="btn btn-primary btn-lg" (click)="createActivity()" id="saveButton" [disabled]="activityForm.invalid">Save</button>
+            <button type="button" class="btn btn-primary btn-lg" (click)="createActivity()" id="saveButton"
+                    [disabled]="activityForm.invalid">Save
+            </button>
           </div>
           <div class="col">
             <button type="button" class="btn btn-dark btn-lg" (click)="navigateToList()" id="backButton">Back</button>
