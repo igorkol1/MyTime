@@ -18,9 +18,7 @@ public class ActivityEntity {
     private Date finish;
 
     protected ActivityEntity() {
-    }
-
-    ;
+    };
 
     public ActivityEntity(long id, UserEntity user, ActivityTypeEntity activityType, String description, Date start, Date finish) {
         this.id = id;
@@ -43,7 +41,7 @@ public class ActivityEntity {
         return user;
     }
 
-    public void setUser(UserEntity userId) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 
