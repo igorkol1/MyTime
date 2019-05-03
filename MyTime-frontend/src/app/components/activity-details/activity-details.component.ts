@@ -18,7 +18,6 @@ export class ActivityDetailsComponent implements OnInit {
   activity: Activity;
   activityTypes: ActivityType[];
   currentActivityType: ActivityType;
-  newActivityName: String;
 
   constructor(
     private activityService: ActivityService,
@@ -29,10 +28,8 @@ export class ActivityDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    //Todo: Refactor me
-    this.systemUser = new User('system', 'system');
     this.id = this.activatedRoute.snapshot.params['id'];
-    this.currentActivityType = new ActivityType(-1, this.systemUser, 'Choose activity type');
+    this.currentActivityType = new ActivityType(-1, null, 'Choose activity type');
     this.refreshActivityTypesList();
     this.activity = new Activity(-1, this.systemUser, this.currentActivityType, '', new Date, new Date);
     if (this.id != -1) {
@@ -69,15 +66,15 @@ export class ActivityDetailsComponent implements OnInit {
   }
 
   addActivityType() {
-    this.currentActivityType.activityName = this.newActivityName;
-    this.activityTypeService.addActivityType(this.currentActivityType).subscribe(() => {
+    this.activityTypeService.addActivityType(this.currentActivityType).subscribe(response => {
+      this.currentActivityType = <ActivityType>response;
+      this.activity.activityType = this.currentActivityType;
       this.refreshActivityTypesList();
     });
   }
 
   refreshActivityTypesList() {
     this.activityTypeService.getActivityTypes().subscribe(response => {
-        console.log(response);
         this.activityTypes = response;
       }
     );

@@ -25,13 +25,9 @@ public class ActivityTypeController {
     }
 
     @PostMapping("/addactivitytype")
-    public ResponseEntity<Void> addActivityType(Authentication authentication, @RequestBody ActivityTypeEntity activityType) {
+    public ActivityTypeEntity addActivityType(Authentication authentication, @RequestBody ActivityTypeEntity activityType) {
         String userName = authentication.getName();
         ActivityTypeEntity createdActivityType = activityTypeService.createActivityType(activityType, userName);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(createdActivityType.getId())
-                .toUri();
-        return ResponseEntity.created(uri).build();
+        return createdActivityType;
     }
 }

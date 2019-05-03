@@ -15,6 +15,11 @@ public class ActivityTypeEntity {
     public ActivityTypeEntity() {
     }
 
+    public ActivityTypeEntity(UserEntity user, String activityName) {
+        this.user = user;
+        this.activityName = activityName;
+    }
+
     public void setUserId(UserEntity user) {
         this.user = user;
     }
