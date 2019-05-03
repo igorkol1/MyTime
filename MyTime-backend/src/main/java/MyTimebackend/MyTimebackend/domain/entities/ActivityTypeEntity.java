@@ -8,14 +8,15 @@ public class ActivityTypeEntity {
     @Id
     @GeneratedValue
     private long id;
-    private long userId;
+    @OneToOne
+    private UserEntity user;
     private String activityName;
 
     public ActivityTypeEntity() {
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUserId(UserEntity user) {
+        this.user = user;
     }
 
     public long getId() {
@@ -26,8 +27,8 @@ public class ActivityTypeEntity {
         this.id = id;
     }
 
-    public long getUserId() {
-        return userId;
+    public UserEntity getUserId() {
+        return user;
     }
 
     public String getActivityName() {

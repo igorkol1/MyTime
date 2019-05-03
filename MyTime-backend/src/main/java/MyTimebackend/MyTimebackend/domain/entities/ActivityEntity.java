@@ -1,8 +1,6 @@
 package MyTimebackend.MyTimebackend.domain.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity(name = "activities")
@@ -11,8 +9,10 @@ public class ActivityEntity {
     @Id
     @GeneratedValue
     private long id;
-    private long userId;
-    private String title;
+    @OneToOne
+    private UserEntity user;
+    @OneToOne
+    private ActivityTypeEntity activityType;
     private String description;
     private Date start;
     private Date finish;
@@ -22,10 +22,10 @@ public class ActivityEntity {
 
     ;
 
-    public ActivityEntity(long id, long userId, String title, String description, Date start, Date finish) {
+    public ActivityEntity(long id, UserEntity user, ActivityTypeEntity activityType, String description, Date start, Date finish) {
         this.id = id;
-        this.userId = userId;
-        this.title = title;
+        this.user = user;
+        this.activityType = activityType;
         this.description = description;
         this.start = start;
         this.finish = finish;
@@ -39,20 +39,20 @@ public class ActivityEntity {
         this.id = id;
     }
 
-    public long getUserId() {
-        return userId;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUser(UserEntity userId) {
+        this.user = user;
     }
 
-    public String getTitle() {
-        return title;
+    public ActivityTypeEntity getActivityType() {
+        return activityType;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setActivityType(ActivityTypeEntity activityType) {
+        this.activityType = activityType;
     }
 
     public String getDescription() {

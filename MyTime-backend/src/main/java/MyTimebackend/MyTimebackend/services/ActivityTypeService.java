@@ -21,7 +21,7 @@ public class ActivityTypeService {
     public List<ActivityTypeEntity> getActivityTypesForUser(String userName) {
         UserEntity user = userRepository.findByUserName(userName);
         if (user != null) {
-            return activityTypeRepository.findByUserId(user.getId());
+            return activityTypeRepository.findByUser(user);
         }
         return null;
     }
@@ -29,7 +29,7 @@ public class ActivityTypeService {
     public ActivityTypeEntity createActivityType(ActivityTypeEntity activityType, String userName) {
         UserEntity user = userRepository.findByUserName(userName);
         if (user != null) {
-            activityType.setUserId(user.getId());
+            activityType.setUserId(user);
             return activityTypeRepository.save(activityType);
         }
         return null;
