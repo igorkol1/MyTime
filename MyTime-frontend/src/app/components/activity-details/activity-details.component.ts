@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Activity} from 'src/app/models/activity.model';
 import {ActivityService} from 'src/app/services/activity.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ActivityType} from '../../models/activity.type';
+import {ActivityTypeService} from '../../services/activity-type.service';
+import {User} from '../../models/user.model';
 
 @Component({
   selector: 'app-activity-details',
@@ -11,10 +14,14 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ActivityDetailsComponent implements OnInit {
 
   id: number;
+  systemUser: User;
   activity: Activity;
+  activityTypes: ActivityType[];
+  currentActivityType: ActivityType;
 
   constructor(
     private activityService: ActivityService,
+    private activityTypeService: ActivityTypeService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -22,7 +29,9 @@ export class ActivityDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
-    this.activity = new Activity(-1, 10001, '', '', new Date, new Date);
+    this.currentActivityType = new ActivityType(-1, null, 'Choose activity type');
+    this.refreshActivityTypesList();
+    this.activity = new Activity(-1, this.systemUser, this.currentActivityType, '', new Date, new Date);
     if (this.id != -1) {
       this.activityService.getActivity(this.id).subscribe(
         response => {
@@ -36,6 +45,7 @@ export class ActivityDetailsComponent implements OnInit {
   }
 
   createActivity() {
+    console.log(this.activity);
     this.activityService.createActivity(this.activity).subscribe(
       data => {
         console.log(data);
@@ -47,5 +57,26 @@ export class ActivityDetailsComponent implements OnInit {
 
   navigateToList() {
     this.router.navigate(['activitiesList']);
+  }
+
+  selectActivityType(activityType: ActivityType) {
+    this.currentActivityType = activityType;
+    this.activity.activityType = this.currentActivityType;
+    console.log(activityType);
+  }
+
+  addActivityType() {
+    this.activityTypeService.addActivityType(this.currentActivityType).subscribe(response => {
+      this.currentActivityType = <ActivityType>response;
+      this.activity.activityType = this.currentActivityType;
+      this.refreshActivityTypesList();
+    });
+  }
+
+  refreshActivityTypesList() {
+    this.activityTypeService.getActivityTypes().subscribe(response => {
+        this.activityTypes = response;
+      }
+    );
   }
 }

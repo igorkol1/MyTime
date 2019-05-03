@@ -22,7 +22,7 @@ public class ActivityService {
     public List<ActivityEntity> findByUsername(String username) {
         UserEntity user = userRepository.findByUserName(username);
         if (user != null) {
-            return activityRepository.findByUserId(user.getId());
+            return activityRepository.findByUser(user);
         }
         return null;
     }
@@ -30,7 +30,7 @@ public class ActivityService {
     public ActivityEntity createActivity(String username, ActivityEntity activity) {
         UserEntity user = userRepository.findByUserName(username);
         if (user != null) {
-            activity.setUserId(user.getId());
+            activity.setUser(user);
             return activityRepository.save(activity);
         }
         return null;

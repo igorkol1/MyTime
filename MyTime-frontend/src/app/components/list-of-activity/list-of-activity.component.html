@@ -13,7 +13,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let activity of activities">
-          <td>{{activity.title}}</td>
+          <td>{{activity.activityType.activityName}}</td>
           <td>{{activity.start | date:'dd-MM-yyyy HH:mm'}}</td>
           <td>{{activity.finish | date:'dd-MM-yyyy HH:mm'}}</td>
           <td><i class="fas fa-trash" id="trashIcon" (click)="deleteActivity(activity.id)"></i>

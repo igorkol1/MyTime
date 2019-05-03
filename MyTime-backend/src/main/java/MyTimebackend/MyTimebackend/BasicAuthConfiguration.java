@@ -30,12 +30,13 @@ public class BasicAuthConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/login", "/logout")
+                .antMatchers("/login", "/logout", "/h2-console/**", "/console/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .httpBasic();
+        http.headers().frameOptions().disable();
     }
 
     @Bean

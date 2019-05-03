@@ -19,7 +19,6 @@ export class ListOfActivityComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Test oninit');
     this.getActivities();
   }
 

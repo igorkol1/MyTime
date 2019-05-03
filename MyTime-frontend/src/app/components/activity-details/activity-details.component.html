@@ -3,12 +3,29 @@
     <div class="col-md-6 offset-md-3">
       <h1 id="formTitle">Add Activity</h1>
 
-      <form (ngSubmit)="!activityForm.invalid && createActivity()" #activityForm="ngForm" >
+      <form (ngSubmit)="!activityForm.invalid && createActivity()" #activityForm="ngForm">
 
         <div class="form-group">
-          <input [(ngModel)]="activity.title" type="text" class="form-control" id="title" name="title"
-                 aria-describedby="titleHelp" placeholder="Enter title" required="required" minlength="3">
-          <small id="titleHelp" class="form-text text-muted">Tell me what did you do</small>
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+            {{activity.activityType.activityName}}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a *ngFor="let activityType of activityTypes" class="dropdown-item"
+               (click)="selectActivityType(activityType)">{{activityType.activityName}}</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item">
+              <div class="input-group mb-3">
+                <input [(ngModel)]="currentActivityType.activityName" id="newActivityName" type="text"
+                       class="form-control" name="newActivityName">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" (click)="addActivityType()"><i
+                    class="fas fa-plus"></i></button>
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
 
         <div class="form-group">
@@ -33,7 +50,9 @@
 
         <div class="form-row" id="buttons-group">
           <div class="col">
-            <button type="submit" class="btn btn-primary btn-lg" (click)="createActivity()" id="saveButton" [disabled]="activityForm.invalid">Save</button>
+            <button type="button" class="btn btn-primary btn-lg" (click)="createActivity()" id="saveButton"
+                    [disabled]="activityForm.invalid || currentActivityType.id==-1">Save
+            </button>
           </div>
           <div class="col">
             <button type="button" class="btn btn-dark btn-lg" (click)="navigateToList()" id="backButton">Back</button>
