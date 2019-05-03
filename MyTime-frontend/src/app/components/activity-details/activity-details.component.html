@@ -6,17 +6,22 @@
       <form (ngSubmit)="!activityForm.invalid && createActivity()" #activityForm="ngForm">
 
         <div class="form-group">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
             {{activity.activityType.activityName}}
           </button>
-          <div  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a *ngFor="let activityType of activityTypes" class="dropdown-item" (click)="selectActivityType(activityType)">{{activityType.activityName}}</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a *ngFor="let activityType of activityTypes" class="dropdown-item"
+               (click)="selectActivityType(activityType)">{{activityType.activityName}}</a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item">
               <div class="input-group mb-3">
-                <input [(ngModel)]="currentActivityType.activityName" id="newActivityName" type="text" class="form-control" name="newActivityName">
+                <input [(ngModel)]="currentActivityType.activityName" id="newActivityName" type="text"
+                       class="form-control" name="newActivityName">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button" (click)="addActivityType()"><i class="fas fa-plus"></i></button>
+                  <button class="btn btn-outline-secondary" type="button" (click)="addActivityType()"><i
+                    class="fas fa-plus"></i></button>
                 </div>
               </div>
             </a>

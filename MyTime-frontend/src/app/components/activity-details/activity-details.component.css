@@ -1,4 +1,4 @@
-#formTitle{
+#formTitle {
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -14,4 +14,12 @@
 #backButton {
   width: 90%;
   margin-inline-start: 10%;
+}
+
+#dropdownMenuButton {
+  width: 100%;
+}
+
+.dropdown-menu {
+  text-align: center;
 }
