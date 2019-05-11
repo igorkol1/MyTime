@@ -35,7 +35,8 @@
         </div>
 
         <div class="form-group">
-          <input [ngModel]="activity.activityDate | date:'yyyy-MM-dd'" class="form-control" id="date" name="date" placeholder="Enter date">
+          <input [ngModel]="activity.activityDate | date:'yyyy-MM-dd'" class="form-control" id="date" name="date"
+                 placeholder="Enter date" required="required">
         </div>
 
         <div class="form-row">
@@ -57,7 +58,7 @@
         <div class="form-row" id="buttons-group">
           <div class="col">
             <button type="button" class="btn btn-primary btn-lg" (click)="createActivity()" id="saveButton"
-                    [disabled]="activityForm.invalid || currentActivityType.id==-1">Save
+                    [disabled]="activityForm.invalid || activity.activityType.id==-1">Save
             </button>
           </div>
           <div class="col">
