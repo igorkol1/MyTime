@@ -1,6 +1,8 @@
 <div class="container">
   <div class="col-lg-10 col-lg-offset-1" id="activityListContainer">
-    <h1>Activities</h1>
+    <h1 id="activitiesTitle">Activities</h1>
+    <h1 id="date"><i class="fas fa-chevron-left" (click)="decreaseDate()"></i>{{queryDate | date:'dd MM yyyy'}}<i
+      class="fas fa-chevron-right" (click)="increaseDate()"></i></h1>
     <div class="table-responsive-lg">
       <table class="table">
         <thead class="thead-dark">

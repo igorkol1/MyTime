@@ -17,6 +17,11 @@ export class ActivityService {
     return this.http.get<Activity[]>(`${API_URL}activities`);
   }
 
+  getAllActivitiesPerDate(date: Date) {
+    console.log(this.formatDate(date));
+    return this.http.get<Activity[]>(`${API_URL}activitiesForDate?forDate=${this.formatDate(date)}`);
+  }
+
   createActivity(activity) {
     return this.http.post(`${API_URL}activities/addActivity`, activity);
   }
@@ -28,4 +33,14 @@ export class ActivityService {
   getActivity(activityId: number) {
     return this.http.get<Activity>(`${API_URL}activities/getActivity/${activityId}`);
   }
+
+  private formatDate(dateToFormat: Date) {
+    let mm: number = dateToFormat.getMonth() + 1;
+    let dd: number = dateToFormat.getDate();
+    return [dateToFormat.getFullYear(),
+      (mm > 9 ? '' : '0') + mm,
+      (dd > 9 ? '' : '0') + dd
+    ].join('');
+  }
+
 }

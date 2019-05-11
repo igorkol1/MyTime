@@ -28,7 +28,7 @@ public class ActivityController {
     }
 
     @GetMapping("/activitiesForDate")
-    public List<ActivityEntity> getAllActivitiesForDate(Authentication authentication, @RequestParam(value = "forDate") @DateTimeFormat(pattern = "MMddyyyy") LocalDate date) {
+    public List<ActivityEntity> getAllActivitiesForDate(Authentication authentication, @RequestParam(value = "forDate") @DateTimeFormat(pattern = "yyyyMMdd") LocalDate date) {
         String username = authentication.getName();
         return activityService.findByUsernameAndDate(username, date);
     }
