@@ -1,7 +1,9 @@
 package MyTimebackend.MyTimebackend.domain.entities;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 
 @Entity(name = "activities")
 public class ActivityEntity {
@@ -14,19 +16,20 @@ public class ActivityEntity {
     @OneToOne
     private ActivityTypeEntity activityType;
     private String description;
-    private Date start;
-    private Date finish;
+    private LocalDate activityDate;
+    private LocalTime startTime;
+    private LocalTime finishTime;
 
     protected ActivityEntity() {
     };
 
-    public ActivityEntity(long id, UserEntity user, ActivityTypeEntity activityType, String description, Date start, Date finish) {
-        this.id = id;
+    public ActivityEntity(UserEntity user, ActivityTypeEntity activityType, String description, LocalDate activityDate, LocalTime startTime, LocalTime finishTime) {
         this.user = user;
         this.activityType = activityType;
         this.description = description;
-        this.start = start;
-        this.finish = finish;
+        this.activityDate = activityDate;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
     }
 
     public long getId() {
@@ -61,19 +64,27 @@ public class ActivityEntity {
         this.description = description;
     }
 
-    public Date getStart() {
-        return start;
+    public LocalDate getActivityDate() {
+        return activityDate;
     }
 
-    public void setStart(Date start) {
-        this.start = start;
+    public void setActivityDate(LocalDate activityDate) {
+        this.activityDate = activityDate;
     }
 
-    public Date getFinish() {
-        return finish;
+    public LocalTime getStartTime() {
+        return startTime;
     }
 
-    public void setFinish(Date finish) {
-        this.finish = finish;
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getFinishTime() {
+        return finishTime;
+    }
+
+    public void setFinishTime(LocalTime finishTime) {
+        this.finishTime = finishTime;
     }
 }
