@@ -7,8 +7,9 @@ export class Activity {
     public user: User,
     public activityType: ActivityType,
     public description: string,
-    public start: Date,
-    public finish: Date
+    public activityDate: Date,
+    public startTime: string,
+    public finishTime: string
   ) {
   }
 }

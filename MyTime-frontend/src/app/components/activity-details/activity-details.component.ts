@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ActivityType} from '../../models/activity.type';
 import {ActivityTypeService} from '../../services/activity-type.service';
 import {User} from '../../models/user.model';
+import {Time} from '@angular/common';
 
 @Component({
   selector: 'app-activity-details',
@@ -31,7 +32,7 @@ export class ActivityDetailsComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.params['id'];
     this.currentActivityType = new ActivityType(-1, null, 'Choose activity type');
     this.refreshActivityTypesList();
-    this.activity = new Activity(-1, this.systemUser, this.currentActivityType, '', new Date, new Date);
+    this.activity = new Activity(-1, this.systemUser, this.currentActivityType, '', new Date, '00:00:00', '00:00:00');
     if (this.id != -1) {
       this.activityService.getActivity(this.id).subscribe(
         response => {

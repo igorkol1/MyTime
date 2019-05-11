@@ -27,7 +27,7 @@ import {TokenInterceptor} from './services/token-interceptor';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
