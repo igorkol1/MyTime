@@ -22,3 +22,11 @@
   /*padding-right: 2%;*/
   margin-inline-start: 40%;
 }
+
+#date {
+  text-align: right;
+}
+
+#activitiesTitle {
+  position: absolute;
+}

@@ -3,6 +3,7 @@ package MyTimebackend.MyTimebackend.controllers;
 import MyTimebackend.MyTimebackend.domain.entities.ActivityEntity;
 import MyTimebackend.MyTimebackend.services.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -22,7 +24,13 @@ public class ActivityController {
     @GetMapping("/activities")
     public List<ActivityEntity> getAllActivities(Authentication authentication) {
         String username = authentication.getName();
-        return activityService.findByUsername(username);
+        return activityService.findByUsernameAndDate(username);
+    }
+
+    @GetMapping("/activitiesForDate")
+    public List<ActivityEntity> getAllActivitiesForDate(Authentication authentication, @RequestParam(value = "forDate") @DateTimeFormat(pattern = "yyyyMMdd") LocalDate date) {
+        String username = authentication.getName();
+        return activityService.findByUsernameAndDate(username, date);
     }
 
     @GetMapping("/activities/getActivity/{activityId}")

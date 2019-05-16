@@ -12,6 +12,8 @@ import {MenuComponent} from './components/menu/menu.component';
 import {LoginComponent} from './components/login/login.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {TokenInterceptor} from './services/token-interceptor';
+import {BsDatepickerModule} from 'ngx-bootstrap';
+import {TimepickerModule} from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import {TokenInterceptor} from './services/token-interceptor';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot()
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

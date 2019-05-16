@@ -34,15 +34,24 @@
           <small id="descriptionHelp" class="form-text text-muted">Tell me something more</small>
         </div>
 
+        <div class="form-group">
+          <input [(ngModel)]="activity.activityDate" class="form-control" type="text" name="date"
+                 placeholder="Datepicker"
+                 class="form-control"
+                 bsDatepicker [bsConfig]="bsConfig">
+        </div>
+
         <div class="form-row">
           <div class="col">
-            <input [ngModel]="activity.start | date:'yyyy-MM-dd'" class="form-control" type="date" name="start"
-                   aria-describedby="startDateHelp" required="required">
+            <input [(ngModel)]="activity.startTime" class="form-control" type="text" name="start"
+                   aria-describedby="startDateHelp" required="required"
+                   pattern="(([0-1][0-9])|([2][0-3])):([0-5][0-9]):([0-5][0-9])" placeholder="HH:MM:SS">
             <small id="startDateHelp" class="form-text text-muted">When did you start?</small>
           </div>
           <div class="col">
-            <input [ngModel]="activity.finish | date:'yyyy-MM-dd'" class="form-control" type="date" name="finish"
-                   aria-describedby="finishDateHelp" required="required">
+            <input [(ngModel)]="activity.finishTime" class="form-control" type="text" name="finish"
+                   aria-describedby="finishDateHelp" required="required"
+                   pattern="(([0-1][0-9])|([2][0-3])):([0-5][0-9]):([0-5][0-9])" placeholder="HH:MM:SS">
             <small id="finishDateHelp" class="form-text text-muted">When did you finish?</small>
           </div>
 
@@ -51,7 +60,7 @@
         <div class="form-row" id="buttons-group">
           <div class="col">
             <button type="button" class="btn btn-primary btn-lg" (click)="createActivity()" id="saveButton"
-                    [disabled]="activityForm.invalid || currentActivityType.id==-1">Save
+                    [disabled]="activityForm.invalid || activity.activityType.id==-1">Save
             </button>
           </div>
           <div class="col">

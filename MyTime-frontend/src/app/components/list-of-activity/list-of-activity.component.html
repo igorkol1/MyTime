@@ -1,11 +1,14 @@
 <div class="container">
   <div class="col-lg-10 col-lg-offset-1" id="activityListContainer">
-    <h1>Activities</h1>
+    <h1 id="activitiesTitle">Activities</h1>
+    <h1 id="date"><i class="fas fa-chevron-left" (click)="decreaseDate()"></i>{{queryDate | date:'dd MM yyyy'}}<i
+      class="fas fa-chevron-right" (click)="increaseDate()"></i></h1>
     <div class="table-responsive-lg">
       <table class="table">
         <thead class="thead-dark">
         <tr>
           <th>Title</th>
+          <th>Date</th>
           <th>Start</th>
           <th>Finish</th>
           <th id="actionsTitle">Actions</th>
@@ -14,8 +17,9 @@
         <tbody>
         <tr *ngFor="let activity of activities">
           <td>{{activity.activityType.activityName}}</td>
-          <td>{{activity.start | date:'dd-MM-yyyy HH:mm'}}</td>
-          <td>{{activity.finish | date:'dd-MM-yyyy HH:mm'}}</td>
+          <td>{{activity.activityDate | date:'dd-MM-yyyy'}}</td>
+          <td>{{activity.startTime}}</td>
+          <td>{{activity.finishTime}}</td>
           <td><i class="fas fa-trash" id="trashIcon" (click)="deleteActivity(activity.id)"></i>
             <i class="far fa-edit" id="editIcon" (click)="updateActivity(activity.id)"></i>
           </td>

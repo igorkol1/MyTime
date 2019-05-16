@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Activity} from '../../models/activity.model';
 import {Router} from '@angular/router';
 import {ActivityService} from '../../services/activity.service';
+import {DAY_INTERVAL} from '../../app.constans';
 
 @Component({
   selector: 'app-list-of-activity',
@@ -11,6 +12,7 @@ import {ActivityService} from '../../services/activity.service';
 export class ListOfActivityComponent implements OnInit {
 
   activities: Activity[];
+  queryDate: Date;
 
   constructor(
     private activityService: ActivityService,
@@ -19,11 +21,12 @@ export class ListOfActivityComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.queryDate = new Date();
     this.getActivities();
   }
 
   getActivities() {
-    this.activityService.getAllActivities().subscribe(
+    this.activityService.getAllActivitiesPerDate(this.queryDate).subscribe(
       respone => {
         console.log(respone);
         this.activities = respone;
@@ -43,5 +46,15 @@ export class ListOfActivityComponent implements OnInit {
   updateActivity(id: number) {
     console.log('Edit activity', id);
     this.router.navigate(['activity', id]);
+  }
+
+  increaseDate() {
+    this.queryDate = new Date(this.queryDate.getTime() + DAY_INTERVAL);
+    this.getActivities();
+  }
+
+  decreaseDate() {
+    this.queryDate = new Date(this.queryDate.getTime() - DAY_INTERVAL);
+    this.getActivities();
   }
 }

@@ -7,6 +7,7 @@ import MyTimebackend.MyTimebackend.domain.reporitories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +20,18 @@ public class ActivityService {
     @Autowired
     UserRepository userRepository;
 
-    public List<ActivityEntity> findByUsername(String username) {
+    public List<ActivityEntity> findByUsernameAndDate(String username) {
         UserEntity user = userRepository.findByUserName(username);
         if (user != null) {
             return activityRepository.findByUser(user);
+        }
+        return null;
+    }
+
+    public List<ActivityEntity> findByUsernameAndDate(String username, LocalDate date) {
+        UserEntity user = userRepository.findByUserName(username);
+        if (user != null) {
+            return activityRepository.findByUserAndActivityDate(user, date);
         }
         return null;
     }
@@ -44,4 +53,5 @@ public class ActivityService {
         Optional<ActivityEntity> optionalActivityEntity = activityRepository.findById(activityId);
         return optionalActivityEntity.orElse(null);
     }
+
 }
