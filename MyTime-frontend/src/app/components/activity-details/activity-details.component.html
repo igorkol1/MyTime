@@ -35,7 +35,10 @@
         </div>
 
         <div class="form-group">
-          <input [(ngModel)]="activity.activityDate" class="form-control" type="date" name="date">
+          <input [(ngModel)]="activity.activityDate" class="form-control" type="text" name="date"
+                 placeholder="Datepicker"
+                 class="form-control"
+                 bsDatepicker [bsConfig]="bsConfig">
         </div>
 
         <div class="form-row">
