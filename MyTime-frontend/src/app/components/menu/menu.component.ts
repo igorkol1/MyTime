@@ -25,4 +25,8 @@ export class MenuComponent implements OnInit {
   logout() {
     this.router.navigate(['logout']);
   }
+
+  goToGraphs() {
+    this.router.navigate(['graphs']);
+  }
 }

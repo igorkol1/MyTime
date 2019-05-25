@@ -14,6 +14,7 @@ import {LogoutComponent} from './components/logout/logout.component';
 import {TokenInterceptor} from './services/token-interceptor';
 import {BsDatepickerModule} from 'ngx-bootstrap';
 import {TimepickerModule} from 'ngx-bootstrap';
+import {GraphComponent} from './components/graph/graph.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {TimepickerModule} from 'ngx-bootstrap';
     FooterComponent,
     MenuComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
