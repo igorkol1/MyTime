@@ -15,6 +15,9 @@ import {TokenInterceptor} from './services/token-interceptor';
 import {BsDatepickerModule} from 'ngx-bootstrap';
 import {TimepickerModule} from 'ngx-bootstrap';
 import {GraphComponent} from './components/graph/graph.component';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastComponent} from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +35,10 @@ import {GraphComponent} from './components/graph/graph.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),
+    ToastrModule.forRoot()
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
