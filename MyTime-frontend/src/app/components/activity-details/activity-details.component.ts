@@ -5,8 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ActivityType} from '../../models/activity.type';
 import {ActivityTypeService} from '../../services/activity-type.service';
 import {User} from '../../models/user.model';
-import {Time} from '@angular/common';
 import {BsDatepickerConfig} from 'ngx-bootstrap';
+import {ToastComponent, ToastType} from '../toast/toast.component';
 
 @Component({
   selector: 'app-activity-details',
@@ -26,7 +26,8 @@ export class ActivityDetailsComponent implements OnInit {
     private activityService: ActivityService,
     private activityTypeService: ActivityTypeService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toast: ToastComponent
   ) {
   }
 
@@ -42,6 +43,7 @@ export class ActivityDetailsComponent implements OnInit {
           this.activity = response;
         },
         error => {
+          this.toast.showToast(ToastType.ERROR, 'Fail to get activity');
           console.log(error.error.message);
         }
       );
@@ -53,9 +55,13 @@ export class ActivityDetailsComponent implements OnInit {
     this.activityService.createActivity(this.activity).subscribe(
       data => {
         console.log(data);
+        this.toast.showToast(ToastType.SUCCESS, 'Record is saved');
         this.navigateToList();
       },
-      error => console.log(error.error.message)
+      error => {
+        this.toast.showToast(ToastType.ERROR, 'Fail to save record');
+        console.log(error.error.message);
+      }
     );
   }
 
@@ -80,6 +86,10 @@ export class ActivityDetailsComponent implements OnInit {
   refreshActivityTypesList() {
     this.activityTypeService.getActivityTypes().subscribe(response => {
         this.activityTypes = response;
+      },
+      error => {
+        this.toast.showToast(ToastType.ERROR, 'Fail to get activity types');
+        console.warn(error);
       }
     );
   }

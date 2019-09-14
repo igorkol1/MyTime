@@ -3,6 +3,7 @@ import {Activity} from '../../models/activity.model';
 import {Router} from '@angular/router';
 import {ActivityService} from '../../services/activity.service';
 import {DAY_INTERVAL} from '../../app.constans';
+import {ToastComponent, ToastType} from '../toast/toast.component';
 
 @Component({
   selector: 'app-list-of-activity',
@@ -16,7 +17,8 @@ export class ListOfActivityComponent implements OnInit {
 
   constructor(
     private activityService: ActivityService,
-    private router: Router
+    private router: Router,
+    private toast: ToastComponent
   ) {
   }
 
@@ -30,6 +32,10 @@ export class ListOfActivityComponent implements OnInit {
       respone => {
         console.log(respone);
         this.activities = respone;
+      },
+      error => {
+        this.toast.showToast(ToastType.ERROR, 'Fail to get activities');
+        console.warn(error);
       }
     );
   }
@@ -37,8 +43,13 @@ export class ListOfActivityComponent implements OnInit {
   deleteActivity(id: number) {
     this.activityService.deleteActivity(id).subscribe(
       response => {
+        this.toast.showToast(ToastType.SUCCESS, 'Record deleted');
         console.log(response);
         this.getActivities();
+      },
+      error => {
+        this.toast.showToast(ToastType.ERROR, 'Fail to delete record');
+        console.warn(error);
       }
     );
   }
