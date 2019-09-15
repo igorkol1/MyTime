@@ -1,5 +1,9 @@
-#formTitle {
+#form{
   margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#formTitle {
   margin-bottom: 10px;
 }
 

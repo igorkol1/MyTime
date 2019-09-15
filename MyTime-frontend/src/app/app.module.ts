@@ -12,12 +12,11 @@ import {MenuComponent} from './components/menu/menu.component';
 import {LoginComponent} from './components/login/login.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {TokenInterceptor} from './services/token-interceptor';
-import {BsDatepickerModule} from 'ngx-bootstrap';
+import {BsDatepickerModule, ModalModule} from 'ngx-bootstrap';
 import {TimepickerModule} from 'ngx-bootstrap';
 import {GraphComponent} from './components/graph/graph.component';
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ToastComponent} from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +35,7 @@ import {ToastComponent} from './components/toast/toast.component';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     ToastrModule.forRoot()

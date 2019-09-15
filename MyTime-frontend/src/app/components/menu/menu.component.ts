@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthorizationService} from '../../services/authorization.service';
+import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap';
+import {ActivityDetailsComponent} from '../activity-details/activity-details.component';
 
 @Component({
   selector: 'app-menu',
@@ -9,9 +11,12 @@ import {AuthorizationService} from '../../services/authorization.service';
 })
 export class MenuComponent implements OnInit {
 
+  private modalRef: BsModalRef;
+
   constructor(
     private router: Router,
-    private auth: AuthorizationService
+    private auth: AuthorizationService,
+    private modalService: BsModalService
   ) {
   }
 
@@ -19,7 +24,7 @@ export class MenuComponent implements OnInit {
   }
 
   addActivity() {
-    this.router.navigate(['activity', -1]);
+    this.modalRef = this.modalService.show(ActivityDetailsComponent);
   }
 
   logout() {
