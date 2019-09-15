@@ -1,30 +1,39 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Activity} from '../../models/activity.model';
 import {Router} from '@angular/router';
 import {ActivityService} from '../../services/activity.service';
 import {DAY_INTERVAL} from '../../app.constans';
 import {ToastComponent, ToastType} from '../toast/toast.component';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {ActivityDetailsComponent} from '../activity-details/activity-details.component';
 
 @Component({
   selector: 'app-list-of-activity',
   templateUrl: './list-of-activity.component.html',
   styleUrls: ['./list-of-activity.component.css']
 })
-export class ListOfActivityComponent implements OnInit {
+export class ListOfActivityComponent implements OnInit, OnDestroy {
 
   activities: Activity[];
   queryDate: Date;
+  modalSubscription: any;
+  private modalRef: BsModalRef;
 
   constructor(
     private activityService: ActivityService,
     private router: Router,
-    private toast: ToastComponent
+    private toast: ToastComponent,
+    private modalService: BsModalService
   ) {
   }
 
   ngOnInit() {
     this.queryDate = new Date();
     this.getActivities();
+    this.modalSubscription = this.modalService.onHide;
+    this.modalSubscription.subscribe(() => {
+      this.getActivities();
+    });
   }
 
   getActivities() {
@@ -55,8 +64,7 @@ export class ListOfActivityComponent implements OnInit {
   }
 
   updateActivity(id: number) {
-    console.log('Edit activity', id);
-    this.router.navigate(['activity', id]);
+    this.modalRef = this.modalService.show(ActivityDetailsComponent, {initialState: {id: id}});
   }
 
   increaseDate() {
@@ -67,5 +75,9 @@ export class ListOfActivityComponent implements OnInit {
   decreaseDate() {
     this.queryDate = new Date(this.queryDate.getTime() - DAY_INTERVAL);
     this.getActivities();
+  }
+
+  ngOnDestroy(): void {
+    this.modalSubscription.unsubscribe();
   }
 }

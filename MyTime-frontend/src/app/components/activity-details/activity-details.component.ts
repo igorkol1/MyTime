@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Activity} from 'src/app/models/activity.model';
 import {ActivityService} from 'src/app/services/activity.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ActivityType} from '../../models/activity.type';
 import {ActivityTypeService} from '../../services/activity-type.service';
 import {User} from '../../models/user.model';
-import {BsDatepickerConfig} from 'ngx-bootstrap';
+import {BsDatepickerConfig, BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {ToastComponent, ToastType} from '../toast/toast.component';
 
 @Component({
@@ -13,9 +13,9 @@ import {ToastComponent, ToastType} from '../toast/toast.component';
   templateUrl: './activity-details.component.html',
   styleUrls: ['./activity-details.component.css']
 })
-export class ActivityDetailsComponent implements OnInit {
+export class ActivityDetailsComponent implements OnInit{
 
-  id: number;
+  public id = null;
   systemUser: User;
   activity: Activity;
   activityTypes: ActivityType[];
@@ -27,17 +27,18 @@ export class ActivityDetailsComponent implements OnInit {
     private activityTypeService: ActivityTypeService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private toast: ToastComponent
+    private toast: ToastComponent,
+    private modalService: BsModalService,
+    private bsModalRef: BsModalRef
   ) {
   }
 
   ngOnInit() {
     this.bsConfig = Object.assign({}, {containerClass: 'theme-dark-blue'});
-    this.id = this.activatedRoute.snapshot.params['id'];
     this.currentActivityType = new ActivityType(-1, null, 'Choose activity type');
     this.refreshActivityTypesList();
     this.activity = new Activity(-1, this.systemUser, this.currentActivityType, '', new Date, '00:00:00', '00:00:00');
-    if (this.id != -1) {
+    if (this.id) {
       this.activityService.getActivity(this.id).subscribe(
         response => {
           this.activity = response;
@@ -55,6 +56,7 @@ export class ActivityDetailsComponent implements OnInit {
     this.activityService.createActivity(this.activity).subscribe(
       data => {
         console.log(data);
+        this.bsModalRef.hide();
         this.toast.showToast(ToastType.SUCCESS, 'Record is saved');
         this.navigateToList();
       },
