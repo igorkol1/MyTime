@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {AfterViewInit, Component, Inject, LOCALE_ID, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Activity} from 'src/app/models/activity.model';
 import {ActivityService} from 'src/app/services/activity.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -13,7 +13,7 @@ import {ToastComponent, ToastType} from '../toast/toast.component';
   templateUrl: './activity-details.component.html',
   styleUrls: ['./activity-details.component.css']
 })
-export class ActivityDetailsComponent implements OnInit{
+export class ActivityDetailsComponent implements OnInit {
 
   public id = null;
   systemUser: User;
@@ -42,6 +42,8 @@ export class ActivityDetailsComponent implements OnInit{
       this.activityService.getActivity(this.id).subscribe(
         response => {
           this.activity = response;
+          //Todo: Fix me (implement mapper?)
+          this.activity.activityDate = new Date(this.activity.activityDate);
         },
         error => {
           this.toast.showToast(ToastType.ERROR, 'Fail to get activity');
@@ -55,7 +57,6 @@ export class ActivityDetailsComponent implements OnInit{
     console.log(this.activity);
     this.activityService.createActivity(this.activity).subscribe(
       data => {
-        console.log(data);
         this.bsModalRef.hide();
         this.toast.showToast(ToastType.SUCCESS, 'Record is saved');
         this.navigateToList();
@@ -69,6 +70,10 @@ export class ActivityDetailsComponent implements OnInit{
 
   navigateToList() {
     this.router.navigate(['activitiesList']);
+  }
+
+  back() {
+    this.bsModalRef.hide();
   }
 
   selectActivityType(activityType: ActivityType) {
