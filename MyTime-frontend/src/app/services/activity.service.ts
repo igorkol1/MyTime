@@ -36,7 +36,8 @@ export class ActivityService {
 
   private formatDate(dateToFormat: Date) {
     let mm: number = dateToFormat.getMonth() + 1;
-    let dd: number = dateToFormat.getDate();
+    //Todo: This maybe not necessery after date in db fix
+    let dd: number = dateToFormat.getDate() + 1;
     return [dateToFormat.getFullYear(),
       (mm > 9 ? '' : '0') + mm,
       (dd > 9 ? '' : '0') + dd

@@ -38,6 +38,7 @@
           <input [(ngModel)]="activity.activityDate" class="form-control" type="text" name="date"
                  placeholder="Datepicker"
                  class="form-control"
+                 value="{{ activity.activityDate | date: 'dd/MM/yyyy' }}"
                  bsDatepicker [bsConfig]="bsConfig">
         </div>
 
@@ -64,7 +65,7 @@
             </button>
           </div>
           <div class="col">
-            <button type="button" class="btn btn-dark btn-lg" (click)="navigateToList()" id="backButton">Back</button>
+            <button type="button" class="btn btn-dark btn-lg" (click)="back()" id="backButton">Back</button>
           </div>
 
         </div>
